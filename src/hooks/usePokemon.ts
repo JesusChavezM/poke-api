@@ -5,6 +5,8 @@ export type PokemonListItem = {
   name: string;
   url: string;
   id?: number;
+  artwork?: string;
+  primaryType?: string;
 };
 
 export type PaginatedList<T> = {
@@ -35,11 +37,6 @@ export function usePokemon() {
   const loadingDetail = ref(false);
   const detailError = ref<string | null>(null);
 
-  function extractIdFromUrl(url?: string) {
-    const m = (url || '').match(/\/pokemon\/(\d+)\/?$/);
-    return m ? Number(m[1]) : undefined;
-  }
-
   async function fetchList(limit = 20, offset = 0) {
     loadingList.value = true;
     listError.value = null;
@@ -51,9 +48,10 @@ export function usePokemon() {
       const payload = (res.data && (res.data as any).data) ?? res.data;
       if (res.status >= 200 && res.status < 300 && payload) {
         const newItems = (payload.results || []).map((r: any) => {
-          const id = extractIdFromUrl(r.url);
-          return id !== undefined ? { name: r.name, url: r.url, id } : { name: r.name, url: r.url };
-        }) as Array<{ name: string; url: string; id?: number }>;
+          return r.id !== undefined
+            ? { name: r.name, url: r.url, id: r.id, artwork: r.artwork, primaryType: r.primaryType }
+            : { name: r.name, url: r.url };
+        }) as Array<{ name: string; url: string; id?: number; artwork?: string; primaryType?: string }>;
 
         if (offset === 0) {
           list.value = newItems;
@@ -76,10 +74,7 @@ export function usePokemon() {
     }
   }
 
-  async function fetchDetail(
-    nameOrId: string,
-    opts?: { includeEvolutions?: boolean },
-  ): Promise<SimplifiedPokemon | null> {
+  async function fetchDetail(nameOrId: string, opts?: { includeEvolutions?: boolean }): Promise<SimplifiedPokemon | null> {
     const key = String(nameOrId).toLowerCase();
     const includeEvolutions = opts?.includeEvolutions ?? true;
 
@@ -100,13 +95,8 @@ export function usePokemon() {
           name: data.name,
           sprites: data.sprites ?? {},
           types: Array.isArray(data.types) ? data.types : (data.types ?? []).map((t: any) => t),
-          stats:
-            Array.isArray(data.stats) && data.stats.length > 0
-              ? data.stats.map((s: any) => ({ name: s.name, base: s.base }))
-              : [],
-          abilities: Array.isArray(data.abilities)
-            ? data.abilities
-            : (data.abilities ?? []).map((a: any) => a),
+          stats: Array.isArray(data.stats) && data.stats.length > 0 ? data.stats.map((s: any) => ({ name: s.name, base: s.base })) : [],
+          abilities: Array.isArray(data.abilities) ? data.abilities : (data.abilities ?? []).map((a: any) => a),
         };
         if (Array.isArray(data.evolutions)) {
           mapped.evolutions = data.evolutions.map((e: any) => ({
