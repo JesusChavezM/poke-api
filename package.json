@@ -2,7 +2,7 @@
   "name": "poke-api",
   "version": "0.0.1",
   "description": "A Quasar Project",
-  "productName": "poke-api",
+  "productName": "Pokédex Explorer",
   "author": "Jesús Chavez <chavezmele7030@gmail.com>",
   "type": "module",
   "private": true,
