@@ -12,7 +12,7 @@
         <div v-else-if="detail" class="detail-grid">
           <div class="left-col">
             <div class="hero-card" :style="heroStyle">
-              <div class="pokemon-number" v-text="`$ ${String(detail.id ?? '—').padStart(3, '0')}`" />
+              <div class="pokemon-number text-bold" v-text="`No. ${String(detail.id ?? '—').padStart(4, '0')}`" />
               <q-img :src="detail.sprites?.other?.['official-artwork']?.front_default ?? detail.sprites?.front_default" class="hero-img" fit="contain" no-spinner />
               <span class="blob b1" />
               <span class="blob b2" />
