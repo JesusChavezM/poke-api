@@ -2,3 +2,76 @@
 body {
   background-color: #f7f7f7;
 }
+
+.pokemon-card {
+  border-radius: 12px;
+  overflow: hidden;
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease;
+  box-shadow: 0 1px 4px rgba(16, 24, 40, 0.06);
+}
+.type-badge-wrapper {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  z-index: 50;
+  pointer-events: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.18));
+}
+
+.pokemon-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(16, 24, 40, 0.12);
+}
+
+.card-image {
+  display: block;
+}
+.image-wrapper {
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px 12px 0 0;
+}
+
+.img-overlay-center {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pokeball-loader {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+  opacity: 0.95;
+  animation: rotateSlow 1200ms linear infinite;
+}
+
+.meta-pokeball {
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+  opacity: 0.9;
+  transform: translateY(1px);
+}
+
+.id-text {
+  color: rgba(60, 60, 60, 0.72);
+  font-weight: 600;
+  letter-spacing: 0.2px;
+}
+
+/* animación sutil */
+@keyframes rotateSlow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
