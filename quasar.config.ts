@@ -11,7 +11,7 @@ export default defineConfig((/* ctx */) => {
     // app boot file (/src/boot)
     // --> boot files are part of "main.js"
     // https://v2.quasar.dev/quasar-cli-vite/boot-files
-    boot: [],
+    boot: ['google', 'auth'],
 
     // https://v2.quasar.dev/quasar-cli-vite/quasar-config-file#css
     css: ['app.scss'],
@@ -79,7 +79,12 @@ export default defineConfig((/* ctx */) => {
 
     // Full list of options: https://v2.quasar.dev/quasar-cli-vite/quasar-config-file#devserver
     devServer: {
-      // https: true,
+      // otros ajustes...
+      headers: {
+        'Cross-Origin-Opener-Policy': 'same-origin-allow-popups',
+        // evita poner COEP estricto si no sabes por qué lo necesitas:
+        // 'Cross-Origin-Embedder-Policy': 'unsafe-none',
+      },
       open: true, // opens browser window automatically
     },
 
