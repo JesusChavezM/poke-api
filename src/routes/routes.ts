@@ -8,10 +8,9 @@ const routes: Array<RouteRecordRaw> = [
       {
         path: '',
         name: 'home',
-        component: () => import('pages/IndexPage.vue'),
+        component: () => import('src/pages/index.vue'),
         meta: { requiresAuth: true },
       },
-      // TODO: Add other pages here ...
     ],
   },
   {
@@ -21,7 +20,8 @@ const routes: Array<RouteRecordRaw> = [
   },
   {
     path: '/:catchAll(.*)*',
-    component: () => import('pages/ErrorNotFound.vue'),
+    name: 'not-found',
+    component: () => import('src/pages/ErrorNotFound.vue'),
   },
 ];
 
