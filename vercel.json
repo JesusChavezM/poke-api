@@ -8,7 +8,13 @@
   "headers": [
     {
       "source": "/(.*)",
-      "headers": [{ "key": "Cross-Origin-Opener-Policy", "value": "same-origin-allow-popups" }]
+      "headers": [
+        { "key": "Cross-Origin-Opener-Policy", "value": "same-origin-allow-popups" },
+        {
+          "key": "Content-Security-Policy",
+          "value": "default-src 'self'; script-src 'self' 'unsafe-inline' https://accounts.google.com https://accounts.google.com/gsi https://apis.google.com; connect-src 'self' https://oauth2.googleapis.com https://poke-server-lake.vercel.app; img-src 'self' data: https://raw.githubusercontent.com https://lh3.googleusercontent.com; style-src 'self' 'unsafe-inline'; frame-src https://accounts.google.com https://accounts.google.com/gsi/; frame-ancestors 'self';"
+        }
+      ]
     }
   ]
 }
