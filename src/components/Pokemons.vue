@@ -3,7 +3,6 @@
     <div class="col-12">
       <div class="row items-center justify-between">
         <div class="col">
-          <div class="text-h2" v-text="'Pokédex Explorer'" />
           <div class="text-subtitle1 text-grey-7 q-mt-xs" v-text="'Implementando PokeAPI — interfaz ligera que muestra imágenes oficiales, tipos y evoluciones.'" />
           <div class="q-mt-xs">
             <span class="text-caption text-grey-6" v-text="`Mostrando ${list.length} de ${count ?? 0} Pokémon`" />
